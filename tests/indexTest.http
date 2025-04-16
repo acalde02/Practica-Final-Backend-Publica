@@ -1,0 +1,213 @@
+@baseUrl = http://localhost:3000/api
+@token = Bearer TOKEN
+@deliveryNoteId = "_ID_DEL_ALBARÁN_"
+
+@projectId = "_ID_DEL_PROYECTO_"
+
+@clientId = "_ID_DEL_CLIENTE_"
+
+@userId = "_ID_DEL_USUARIO_"
+
+### Registro de usuario
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "name": "Nombre Apellido",
+  "age": 25,
+  "email": "usuario@example.com",
+  "password": "TuPassword123!",
+  "role": "admin"
+}
+
+### Verificar código con JWT
+POST {{baseUrl}}/auth/verify
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "code": 123456
+}
+
+### Login
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "usuario@example.com",
+  "password": "TuPassword123!"
+}
+
+### Obtener datos de usuario
+GET {{baseUrl}}/user
+Content-Type: application/json
+Authorization: {{token}}
+
+### Actualizar datos de usuario
+PUT {{baseUrl}}/user/register
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "name": "Nombre",
+  "surnames": "Apellidos",
+  "nif": "12345678A",
+  "email": "usuario@example.com"
+}
+
+### Crear o actualizar compañía
+PATCH {{baseUrl}}/user/company
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "name": "Empresa XYZ S.L.",
+  "cif": "B12345678",
+  "street": "Calle Falsa",
+  "number": 123,
+  "postal": 28000,
+  "city": "Madrid",
+  "province": "Madrid"
+}
+
+### Subir logo de compañía
+PATCH {{baseUrl}}/company/logo
+Content-Type: multipart/form-data; boundary=Boundary
+Authorization: {{token}}
+
+--Boundary
+Content-Disposition: form-data; name="image"; filename="HIYA.png"
+Content-Type: image/png
+
+< "RUTA/DEL/ARCHIVO"
+--Boundary--
+
+### Agregar invitado
+POST {{baseUrl}}/user/guest
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "email": "invitado@example.com",
+  "name": "Nombre",
+  "surnames": "Apellidos",
+  "nif": "11223344K",
+  "password": "Invitado123!"
+}
+
+### Login invitado
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "invitado@example.com",
+  "password": "Invitado123!"
+}
+
+### Eliminar usuario (soft delete)
+DELETE {{baseUrl}}/user
+Content-Type: application/json
+Authorization: {{token}}
+
+### Restaurar usuario
+PATCH {{baseUrl}}/user/restore/<userId>
+Content-Type: application/json
+Authorization: {{token}}
+
+### Eliminar usuario (hard delete)
+DELETE {{baseUrl}}/user/?soft=false
+Content-Type: application/json
+Authorization: {{token}}
+
+### Solicitar cambio de contraseña
+POST {{baseUrl}}/user/request-reset
+Content-Type: application/json
+
+{
+  "email": "usuario@example.com"
+}
+
+### Cambiar contraseña
+POST {{baseUrl}}/user/reset-password
+Content-Type: application/json
+
+{
+  "email": "usuario@example.com",
+  "newPassword": "NuevaPassword123!",
+  "code": 000000
+}
+
+### Agregar cliente
+POST {{baseUrl}}/client/register
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "name": "Cliente Ficticio",
+  "street": "Calle Imaginaria",
+  "number": 123,
+  "postal": 28001,
+  "city": "Madrid",
+  "province": "Madrid",
+  "phone": "600123456",
+  "email": "cliente@falso.com",
+  "role": "cliente"
+}
+
+### Crear Proyecto
+POST {{baseUrl}}/project
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "name": "Proyecto Ficticio",
+  "description": "Descripción del proyecto",
+  "startDate": "2023-10-01",
+  "endDate": "2024-10-01",
+  "client": {{clientId}},
+}
+
+### Obtener clientes
+GET {{baseUrl}}/client
+Content-Type: application/json
+Authorization: {{token}}
+
+### Crear albarán
+POST http://localhost:3000/api/delivery-note
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "format": "hours",
+  "projectId": {{projectId}},
+  "hours": 4,
+  "description": "Trabajo realizado en la obra"
+}
+
+### Obtener albaranes
+GET {{baseUrl}}/delivery-note
+Authorization: {{token}}
+
+
+
+### Obtener albarán por ID
+GET {{baseUrl}}/delivery-note/{{deliveryNoteId}}
+Authorization: {{token}}
+
+### Obtener PDF de un Albarán
+GET http://localhost:3000/api/delivery-note/pdf/{{deliveryNoteId}}
+Authorization: Bearer {{token}}
+Accept: application/pdf
+
+
+### Firmar albarán
+PATCH {{baseUrl}}/delivery-note/sign/{{deliveryNoteId}}
+Content-Type: multipart/form-data; boundary=Boundary
+Authorization: {{token}}
+
+--Boundary
+Content-Disposition: form-data; name="file"; filename="firma.png"
+Content-Type: image/png
+
+< RJUTA/DEL/ARCHIVO
+--Boundary--
