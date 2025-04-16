@@ -1,0 +1,23 @@
+# Puerto del servidor
+PORT=3000
+
+# Conexión a la base de datos MongoDB
+DB_HOST=mongodb://localhost:27017/albaranes
+
+# Secreto JWT para autenticación
+JWT_SECRET=your_jwt_secret
+
+# Configuración de correo
+EMAIL=your_email@hotmail.com
+CLIENT_ID=your_client_id
+REFRESH_TOKEN=your_refresh_token
+PUBLIC_IRL=https://yourdomain.com
+
+# Webhook para reportar errores a Slack
+SLACK_WEBHOOK_URL=https://hooks.slack.com/services/...
+
+# Pinata (IPFS)
+PINATA_GATEWAY_URL=https://gateway.pinata.cloud/ipfs/
+PINATA_KEY=your_pinata_key
+PINATA_SECRET=your_pinata_secret
+PINATA_JWT=Bearer your_pinata_jwt
