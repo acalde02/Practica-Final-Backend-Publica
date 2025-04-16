@@ -133,7 +133,7 @@ npm test
 
 ---
 
-## 📤 Subida de imágenes y PDF
+## Subida de imágenes y PDF
 
 - Imágenes de firma y logos se suben a IPFS vía Pinata.
 - El albarán firmado se convierte a PDF y también se sube.
