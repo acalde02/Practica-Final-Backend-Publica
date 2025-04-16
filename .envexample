@@ -8,7 +8,7 @@ DB_HOST=mongodb://localhost:27017/albaranes
 JWT_SECRET=your_jwt_secret
 
 # Configuración de correo
-EMAIL=your_email@hotmail.com
+EMAIL=your_email@outlook.com
 CLIENT_ID=your_client_id
 REFRESH_TOKEN=your_refresh_token
 PUBLIC_IRL=https://yourdomain.com
