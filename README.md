@@ -35,25 +35,27 @@ Crea un archivo `.env` en la raíz con este contenido:
 
 ```env
 PORT=3000
+DB_HOST=mongodb://localhost:27017/albaranes
 JWT_SECRET=supersecret123
 
-MONGO_URI=mongodb://localhost:27017/albaranes
-
-PINATA_JWT=Bearer tu_token_de_pinata
-PINATA_GATEWAY_URL=https://gateway.pinata.cloud/ipfs/
+EMAIL=tu_correo@outlook.com
+CLIENT_ID=tu_client_id
+REFRESH_TOKEN=tu_refresh_token
+PUBLIC_IRL=https://tudominio.com
 
 SLACK_WEBHOOK_URL=https://hooks.slack.com/services/...
 
-EMAIL_HOST=smtp.hotmail.com
-EMAIL_PORT=587
-EMAIL_USER=tu_correo@hotmail.com
-EMAIL_PASS=tu_contraseña_de_aplicacion
+PINATA_GATEWAY_URL=https://gateway.pinata.cloud/ipfs/
+PINATA_KEY=tu_pinata_key
+PINATA_SECRET=tu_pinata_secret
+PINATA_JWT=Bearer tu_pinata_jwt
 ```
 
 ### Paso 3: Configurar envío de correos
 
-- Se recomienda usar **una contraseña de aplicación** en Gmail.
-- Activa el acceso de aplicaciones seguras o usa un servicio SMTP como Mailtrap o SendGrid.
+- Para Gmail, se recomienda usar una **contraseña de aplicación**.
+- También puedes usar servicios SMTP como Mailtrap o SendGrid.
+- Los campos `CLIENT_ID` y `REFRESH_TOKEN` se usan para OAuth si aplicas Gmail OAuth2.
 
 ---
 
